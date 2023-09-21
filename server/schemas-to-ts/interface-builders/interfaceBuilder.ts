@@ -258,7 +258,7 @@ export abstract class InterfaceBuilder {
           ? 'User'
           : `${pascalCase(attributeValue.target.split('.')[1])}`;
 
-        if (schemaType === SchemaType.Plain || schemaType === SchemaType.AdminPanelLifeCycle) {
+        if (schemaType === SchemaType.AdminPanelLifeCycle) {
           propertyType += plainClassSuffix;
         }
 
@@ -269,7 +269,7 @@ export abstract class InterfaceBuilder {
         if (schemaType === SchemaType.Standard) {
           propertyDefinition = `${indentation}${propertyName}: { data: ${propertyType}${bracketsIfArray} };\n`;
         } else if (schemaType === SchemaType.Plain) {
-          propertyDefinition = `${indentation}${propertyName}: ${propertyType}${bracketsIfArray};\n`;
+          propertyDefinition = `${indentation}${propertyName}: { data: ${propertyType}${bracketsIfArray} };\n`;
         } else if (schemaType === SchemaType.NoRelations) {
           propertyDefinition = `${indentation}${propertyName}: number${bracketsIfArray};\n`;
         } else if (schemaType === SchemaType.AdminPanelLifeCycle) {
@@ -331,7 +331,7 @@ export abstract class InterfaceBuilder {
         if (schemaType === SchemaType.Standard) {
           propertyDefinition = `${indentation}${propertyName}: { data: ${propertyType}${bracketsIfArray} };\n`;
         } else if (schemaType === SchemaType.Plain) {
-          propertyDefinition = `${indentation}${propertyName}: ${propertyType}${bracketsIfArray};\n`;
+          propertyDefinition = `${indentation}${propertyName}: { data: ${propertyType}${bracketsIfArray} };\n`;
         } else if (schemaType === SchemaType.NoRelations) {
           propertyDefinition = `${indentation}${propertyName}: number${bracketsIfArray};\n`;
         } else if (schemaType === SchemaType.AdminPanelLifeCycle) {
@@ -472,7 +472,7 @@ export abstract class InterfaceBuilder {
       if (schemaType === SchemaType.Standard) {
         interfaceText += `${indentation}localizations?: { data: ${schemaInfo.pascalName}[] };\n`;
       } else {
-        interfaceText += `${indentation}localizations?: ${schemaInfo.pascalName}[];\n`;
+        interfaceText += `${indentation}localizations?: { data: ${schemaInfo.pascalName}[] };\n`;
       }
     }
     if (schemaInfo.source === SchemaSource.Api && schemaType === SchemaType.Standard) {
